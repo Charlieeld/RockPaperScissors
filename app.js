@@ -1,103 +1,134 @@
 // const playerChoice = playersPlay();
 const computerChoice = "";
-const playerChoice = "";
+let playerChoice = "";
 let computerScore = 0;
 let playerScore = 0;
 
+
+//Query selectors 
+const playBtn = document.querySelector(".play")
+const cta = document.querySelectorAll(".cta")
+const choice = document.querySelectorAll(".turn-btn")
+const reset = document.querySelector('.replay')
+let winner = document.querySelector('.winner')
+let pScore = document.querySelector('.player-score');
+let cScore = document.querySelector('.computer-score')
+
+
+//transition to game
+playBtn.addEventListener('click', () => {
+    //hide play btn and run resetgame function
+    playBtn.classList.add('d-none')
+    resetGame()
+})
+
+reset.addEventListener('click', () => {
+    resetGame()
+})
+
+
+// run players turn and output winner 
+for(let i = 0; i < choice.length; i++){
+     choice[i].addEventListener('click', e => {
+    playerChoice = e.target.value
+    playRound(playerChoice, computerChoice)
+
+    if(computerScore === 5 || playerScore === 5) {
+        cta.forEach(function(element) {
+            element.classList.add('d-none')
+        })
+
+        reset.classList.remove('d-none')
+
+        if(computerScore === 5) {
+            winner.innerText = `The computer beat you this time`
+        } else {
+            winner.innerText = `CONGRATULATION, YOU WON!`
+        }
+
+    }
+    })
+}
+
+//run computer turn
 function computersPlay() {
     let turn = ['rock', 'paper', 'scissors']
-    let choice = turn[Math.floor(Math.random() * turn.length)];
-
-    return choice;
+    let compturn = turn[Math.floor(Math.random() * turn.length)];
+    return compturn;
 }
 
-function playersPlay() {
-    let msg = ('pick between rock, paper, scissors')
-    return prompt(msg.toLowerCase())
-}
-
-
-
-
+// Play a round of rock paper scissors
 function playRound(playerChoice, computerChoice) {
+
+    computerChoice = computersPlay()
+
     console.log(`you chose ${playerChoice} , Computer chose ${computerChoice}`)
-    
+   
     if(playerChoice === computerChoice) {
-        return "tie";
+        winner.innerText = 'That round was a tie!'
     } else if(playerChoice === 'rock' && computerChoice === 'paper') {
-        computerScore++
-        return "comp";
+        computerScore ++; 
+        KeepCpuSore();
+        winner.innerText = 'Computer won that round';
     } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
-        playerScore++
-        return "player";
+        playerScore ++;
+        keepPlayerScore();
+        winner.innerText = 'You won that round!';
     } else if(playerChoice === 'paper' && computerChoice === 'rock') {
-        playerScore++
-        return "player";
+        playerScore ++;
+        keepPlayerScore();
+        winner.innerText = 'You won that round!';
     } else if (playerChoice === 'paper' && computerChoice === 'scissors') {
-        computerScore++;
-        return "comp";
+        computerScore ++;
+        KeepCpuSore();
+        winner.innerText = 'Computer won that round';
     } else if(playerChoice === 'scissors' && computerChoice === 'rock') {
-        computerScore++;
-        return "comp";
+        computerScore ++;
+        KeepCpuSore();
+        winner.innerText = 'Computer won that round';
     } else if (playerChoice === 'scissors' && computerChoice === 'paper') {
-        playerScore++
-        return "player";
+        playerScore ++;
+        keepPlayerScore();
+        winner.innerText = 'You won that round!';
     } 
 
+    
 }
 
 
-function game() {
-    for(let i = 1; i <=5; i++ ) {
-    playRound(playersPlay(), computersPlay())
-}
-    if(computerScore > playerScore) {
-        console.log('computer wins the game.')
-    } else if(computerScore < playerScore){
-        console.log('You win the game!')
-    } else {
-        console.log('This game is a draw')
-    }
+
+//player score output
+function keepPlayerScore() {
+     pScore.innerText = `Your score: ${playerScore}`;
+     
+    
 }
 
-game()
+//computer score output
+function KeepCpuSore() {
+    cScore.innerText = `Computer score: ${computerScore}`;
+    
+}
 
 
 
-/*
-switch(computerScore){
-        case 1: 
-        console.log('That was unlucky')
-        break;
-        case 2: 
-        console.log('The computer wins again')
-        break;
-        case 3: 
-        console.log('You got this')
-        break;
-        case 4: 
-        console.log('One last chance')
-        break;
-        case 5: 
-        console.log('Computer has won!')
-        break;
-    }
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    cScore.innerText = `Computer score: ${computerScore}`;
+    pScore.innerText = `Your score: ${playerScore}`;
 
-    switch(playerScore){
-        case 1: 
-        console.log('You got your first point on the board')
-        break;
-        case 2: 
-        console.log('You won again')
-        break;
-        case 3: 
-        console.log('You got this')
-        break;
-        case 4: 
-        console.log('One more point to go')
-        break;
-        case 5: 
-        console.log('Congratulations, you win!')
-        break;
+    cta.forEach(function(element) {
+        element.classList.remove('d-none')
+    });
 
-        */
+    winner.classList.remove('d-none')
+    winner.innerText = '';
+    reset.classList.add('d-none');
+
+
+
+}
+
+
+

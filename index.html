@@ -4,10 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    
+    <div class="container">
+        <!-- Heading -->
+        <div>
+            <h1 class="main-heading">Rock, Paper, Scissors</h1>
+        </div>
+        <!-- Rules -->
+        <div class="rules">
+            <h2 class="heading-med">Rules:</h2>
+            <ul class="rules-list">
+                <li>Paper beats Rock</li>
+                <li>Rock beats Scissors</li>
+                <li>Scissors beats Paper</li>
+            </ul>
+        </div>
+
+        <!-- Play button -->
+        <div>
+            <button class="btn-primary play">Ready to play?</button>
+        </div>
+        <!-- The game -->
+        <div class="game cta d-none">
+            <h2 class="heading-med">Choose your weapon!</h2>
+            <div class="choice">
+                <button value="rock" class="btn-primary turn-btn">ROCK</button>
+                <button value ="paper" class="btn-primary turn-btn">PAPER</button>
+                <button value="scissors" class="btn-primary turn-btn">SCISSORS</button>
+            </div>
+        </div>
+        <!-- Scores -->
+        <div class="score cta d-none">
+            <p class="player-score">Player score: 0</p>
+            <p class="computer-score">computer score: 0</p>
+        </div>
+        <!-- Winner -->
+        <p class="winner d-none"></p>
+        <button class="btn-primary replay d-none">Play again?</button>
+    </div>
 
 </body>
 
